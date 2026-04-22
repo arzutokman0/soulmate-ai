@@ -1,2 +1,7 @@
-# SoulMate Backend - FastAPI başlangıç dosyası
-print("Backend servisi hazır.")
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"status": "success", "message": "SoulMate API is running"}
