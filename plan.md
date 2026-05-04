@@ -1,58 +1,28 @@
-\# SoulMate Proje Planı (Roadmap)
+\# Geliştirme Yol Haritası
 
 
 
-Bu dosya, SoulMate projesinin geliştirme süreçlerini ve haftalık hedeflerini içermektedir.
+\## Aşama 1: Temel Kurulum (Tamamlandı)
+
+\- \[x] Backend (FastAPI) iskeleti.
+
+\- \[x] Frontend (Flutter) iskeleti.
+
+\- \[x] GitHub entegrasyonu.
 
 
 
-\## 📅 Haftalık Geliştirme Takvimi
+\## Aşama 2: Duygu Analizi ve Masal Motoru
+
+\- \[ ] Sesli girdi üzerinden basit duygu analizi modülü.
+
+\- \[ ] Gemini API ile mod bazlı masal üretme promptu.
 
 
 
-\### 1. Hafta: Planlama ve Altyapı (Tamamlandı ✅)
+\## Aşama 3: Hayal Gücü Modu (Bilmeceler)
 
-\- MVP kapsamının belirlenmesi.
+\- \[ ] Nesne betimleme ve doğrulama mantığı.
 
-\- PRD dökümanının hazırlanması.
-
-\- GitHub reposunun kurulumu.
-
-
-
-\### 2. Hafta: Backend ve AI Entegrasyonu
-
-\- FastAPI ortamının kurulması.
-
-\- Gemini API bağlantısının yapılması.
-
-\- 3 farklı karakter (Rasyonel, Duygusal, Cesur) için "System Prompt"ların yazılması.
-
-
-
-\### 3. Hafta: Mobil Arayüz (Frontend) Başlangıç
-
-\- Flutter/React Native projesinin oluşturulması.
-
-\- Karakter seçim ekranının tasarlanması.
-
-\- Sohbet arayüzünün (Chat UI) kodlanması.
-
-
-
-\### 4. Hafta: Hafıza ve Veri Yönetimi
-
-\- Kullanıcı bilgilerini hatırlayan Vektör Veritabanı entegrasyonu.
-
-\- Geçmiş sohbet bağlamının korunması üzerine çalışmalar.
-
-
-
-\### 5. Hafta: Test ve Final Dokunuşlar
-
-\- Hata ayıklama (Debugging).
-
-\- Mesaj analiz özelliğinin (Vision AI) test edilmesi.
-
-\- Projenin yayına hazır hale getirilmesi.
+\- \[ ] Karakter seslendirme ve çocuk dostu arayüz tasarımı.
 

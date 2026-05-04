@@ -4,4 +4,9 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"status": "success", "message": "SoulMate API is running"}
+    return {
+        "status": "ready",
+        "project": "SoulMate Kids API",
+        "version": "1.0.0",
+        "mode": "Emotional Support & Educational"
+    }
