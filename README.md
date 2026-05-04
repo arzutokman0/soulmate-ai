@@ -1,66 +1,20 @@
-\# 🌟 SoulMate: AI-Driven Personal Mentor \& Companion
+# 🌟 SoulMate Kids: Duygusal Zekaya Sahip Çocuk Gelişim Asistanı
 
+SoulMate Kids, 0-7 yaş grubu çocukların dünyayı güvenle keşfetmelerini sağlayan, gizlilik odaklı ve yapay zeka tabanlı bir oyun arkadaşıdır.
 
+## 🚀 Proje Vizyonu
+Ekran süresini pasif bir aktivite olmaktan çıkarıp; çocuğu fiziksel dünyada hareket etmeye teşvik eden, dil becerilerini geliştiren ve duygusal farkındalığını artıran bir deneyim sunmaktır.
 
-\*\*SoulMate\*\*, sadece bir yapay zeka değil; her an yanında olan, seni tanıyan ve hayatın zorluklarında sana farklı perspektifler sunan dijital bir yaşam ortağıdır.
+## ✨ Temel Özellikler (MVP)
+*   **🕵️ Hayal Gücü Modu (Sesli Hazine Avı):** AI, çocuğu evin içinde nesne bulmaya yönlendirir (Örn: "Mutfaktan sarı bir meyve tarif et"). Kamera yerine sadece sesli betimleme kullanılır.
+*   **📖 Duygusal Masal Motoru:** Çocuğun o anki ruh haline göre (üzgün, mutlu, heyecanlı) anlık ve interaktif masallar üretir.
+*   **🎭 Karakter Odaklı Etkileşim:** Çocuk, masalı anlatacak ve oyunları yönetecek kahramanını (Ejderha, Baykuş vb.) seçerek güvenli bir bağ kurar.
 
+## 🛡️ Gizlilik ve Güvenlik
+*   **Kamera Erişimi Yok:** Ebeveyn güvenliği için uygulama hiçbir şekilde kamera veya görsel veri kullanmaz.
+*   **Sesli Etkileşim:** Tüm süreç doğal dil işleme (NLP) üzerinden, çocuğun hayal gücünü tetikleyecek şekilde yürütülür.
 
-
-\## 🚀 Proje Vizyonu
-
-Geleneksel chatbotların aksine SoulMate, kullanıcıyla derin bir bağ kurmayı amaçlar. Hiç arkadaşı olmayan birine yoldaşlık ederken, aynı zamanda karmaşık hayat kararlarında stratejik rehberlik sunar.
-
-
-
-\## ✨ Temel Özellikler (MVP)
-
-
-
-\### 1. Dinamik Persona Seçimi (Personalized Mentorship)
-
-Sohbete başlamadan önce ihtiyacınıza göre asistanınızın karakterini seçebilirsiniz:
-
-\* \*\*Analitik Mentor:\*\* Mantıklı, veriye dayalı ve rasyonel tavsiyeler verir.
-
-\* \*\*Empatik Dost:\*\* Duygularınızı anlayan, şefkatli ve destekleyici yaklaşır.
-
-\* \*\*Cesur Rehber:\*\* Sizi konfor alanınızdan çıkaracak, aksiyon odaklı adımlar önerir.
-
-
-
-\### 2. Uzun Süreli Hafıza (Contextual Memory)
-
-SoulMate sizi unutmaz. Geçmişteki başarılarınızı, korkularınızı ve önemli hayat detaylarınızı (iş, okul, ilişkiler) hatırlar. "Dün bahsettiğin o toplantı nasıl geçti?" diye sorarak gerçek bir arkadaşlık deneyimi sunar.
-
-
-
-\### 3. Mesaj \& Ekran Görüntüsü Analizi (Vision AI)
-
-İkili ilişkilerde veya profesyonel yazışmalarda tıkandığınızda, ekran görüntüsünü paylaşarak karşı tarafın tonlamasını analiz ettirebilir ve uygun yanıt taslakları alabilirsiniz.
-
-
-
-\## 🛠️ Teknik Altyapı (Tech Stack)
-
-\* \*\*Frontend:\*\* Flutter (iOS \& Android)
-
-\* \*\*Backend:\*\* Python / FastAPI
-
-\* \*\*AI Engine:\*\* Google Gemini 1.5 Pro API
-
-\* \*\*Database:\*\* PostgreSQL \& Vector Database (Semantic Memory için)
-
-
-
-\## 📁 Proje Yapısı
-
-\- `/docs`: PRD ve tasarım dokümanları.
-
-\- `/backend`: API ve AI entegrasyon kodları.
-
-\- `/mobile`: Mobil uygulama kaynak kodları.
-
-
-
-
-
+## 🛠️ Teknik Altyapı
+*   **Frontend:** Flutter
+*   **Backend:** Python / FastAPI
+*   **AI Engine:** Google Gemini API
