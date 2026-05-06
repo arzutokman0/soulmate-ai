@@ -1,9 +1,26 @@
 name: soulmate_frontend
-description: A new Flutter project.
+description: "A specialized child development assistant for ages 0-7."
 version: 1.0.0+1
+
 environment:
   sdk: ">=3.0.0 <4.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
   http: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Resimlerimizi buraya ekliyoruz. 
+  # Dosya isimlerinin assets klasöründekilerle birebir aynı olması çok önemli!
+  assets:
+    - assets/orman_bg.png
+    - assets/okyanus_bg.png
+    - assets/gece_bg.png

@@ -1,20 +1,34 @@
-# 🌟 SoulMate Kids: Duygusal Zekaya Sahip Çocuk Gelişim Asistanı
+# 🌟 SoulMate Kids - Yapay Zeka Destekli Masal Arkadaşı
 
-SoulMate Kids, 0-7 yaş grubu çocukların dünyayı güvenle keşfetmelerini sağlayan, gizlilik odaklı ve yapay zeka tabanlı bir oyun arkadaşıdır.
+SoulMate Kids, 0-7 yaş grubu çocukların duygusal gelişimlerini desteklemek amacıyla geliştirilmiş, interaktif ve kişiselleştirilmiş bir masal anlatma uygulamasıdır. Çocuklar seçtikleri pofuduk karakterler ve o anki duyguları aracılığıyla kendilerine özel masallar dinleyebilirler.
 
-## 🚀 Proje Vizyonu
-Ekran süresini pasif bir aktivite olmaktan çıkarıp; çocuğu fiziksel dünyada hareket etmeye teşvik eden, dil becerilerini geliştiren ve duygusal farkındalığını artıran bir deneyim sunmaktır.
+## 📸 Uygulama Ekran Görüntüleri
 
-## ✨ Temel Özellikler (MVP)
-*   **🕵️ Hayal Gücü Modu (Sesli Hazine Avı):** AI, çocuğu evin içinde nesne bulmaya yönlendirir (Örn: "Mutfaktan sarı bir meyve tarif et"). Kamera yerine sadece sesli betimleme kullanılır.
-*   **📖 Duygusal Masal Motoru:** Çocuğun o anki ruh haline göre (üzgün, mutlu, heyecanlı) anlık ve interaktif masallar üretir.
-*   **🎭 Karakter Odaklı Etkileşim:** Çocuk, masalı anlatacak ve oyunları yönetecek kahramanını (Ejderha, Baykuş vb.) seçerek güvenli bir bağ kurar.
+Uygulamamızın temel akışı ve kullanıcı arayüzleri aşağıda sunulmuştur:
 
-## 🛡️ Gizlilik ve Güvenlik
-*   **Kamera Erişimi Yok:** Ebeveyn güvenliği için uygulama hiçbir şekilde kamera veya görsel veri kullanmaz.
-*   **Sesli Etkileşim:** Tüm süreç doğal dil işleme (NLP) üzerinden, çocuğun hayal gücünü tetikleyecek şekilde yürütülür.
+### 1. Karakter Seçimi Ekranı
+Çocuğun masal yolculuğuna eşlik edecek olan pofuduk arkadaşını (Tilki, Narval vb.) seçtiği giriş ekranıdır.
+![Karakter Seçimi](ekran_goruntuleri/giris.png)
 
-## 🛠️ Teknik Altyapı
-*   **Frontend:** Flutter
-*   **Backend:** Python / FastAPI
-*   **AI Engine:** Google Gemini API
+### 2. Duygu Belirleme Ekranı
+Çocuğun o günkü ruh halini (Mutlu, Üzgün, Heyecanlı) seçerek masalın içeriğini şekillendirdiği interaktif ekrandır.
+![Duygu Seçimi](ekran_goruntuleri/duygu.png)
+
+### 3. Masal Dünyası
+Yapay zeka (AI) tarafından oluşturulan, seçilen karaktere ve duyguya özel masalın sunulduğu ana ekrandır.
+![Masal Ekranı](ekran_goruntuleri/masal.png)
+
+---
+
+## 🛠️ Teknik Özellikler
+
+- **Frontend:** Flutter ile geliştirilmiş, Hero animasyonları ve mikro-etkileşimlerle zenginleştirilmiş kullanıcı dostu arayüz.
+- **Backend:** FastAPI (Python) kullanılarak oluşturulan asenkron API mimarisi.
+- **Mimari:** Kodun sürdürülebilirliği için Model-View-Component yapısı tercih edilmiştir.
+
+## 🚀 Çalıştırma Talimatları
+
+### Backend'i Başlatma:
+```bash
+cd backend
+python -m uvicorn main:app --reload
