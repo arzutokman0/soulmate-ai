@@ -20,6 +20,7 @@ class EmotionSelectionScreen extends StatelessWidget {
       body: SizedBox.expand(
         child: Stack(
           children: [
+            // Arka Plan Görseli
             Container(
               width: double.infinity,
               height: double.infinity,
@@ -44,7 +45,7 @@ class EmotionSelectionScreen extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  // Karakteri Hero ile sarmaladık (geçiş animasyonu için)
+                  // Karakter Baloncuğu
                   Hero(
                     tag: 'character_bubble',
                     child: Container(
@@ -70,7 +71,6 @@ class EmotionSelectionScreen extends StatelessWidget {
                   const SizedBox(height: 30),
                   _buildSpeechBubble(),
                   const Spacer(),
-                  // DİKKAT: Buraya 'context' parametresini ekledik!
                   _buildEmotionRow(context),
                   const SizedBox(height: 50),
                 ],
@@ -107,7 +107,6 @@ class EmotionSelectionScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // Başına 'context,' eklemeyi unutma!
         _emotionCircle(context, "Mutlu", "😊"),
         _emotionCircle(context, "Üzgün", "😢"),
         _emotionCircle(context, "Heyecanlı", "🤩"),
@@ -118,6 +117,8 @@ class EmotionSelectionScreen extends StatelessWidget {
   Widget _emotionCircle(BuildContext context, String label, String emo) {
     return GestureDetector(
       onTap: () {
+        // Duygu seçildiğinde masalın okunacağı sayfaya geçiyoruz.
+        // Backend isteğini StoryView'ın 'initState'inde atacağız.
         Navigator.push(
           context,
           MaterialPageRoute(

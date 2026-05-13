@@ -30,6 +30,7 @@ class CharacterSelectionScreen extends StatelessWidget {
               const SizedBox(height: 20),
               _buildPuffyTitle(),
               const Spacer(),
+              // Neşeli Narval
               CharacterCard(
                   name: "Neşeli Narval",
                   emoji: "🐳",
@@ -41,6 +42,7 @@ class CharacterSelectionScreen extends StatelessWidget {
                       "okyanus_bg.png",
                       SoulMateColors.narvalGlow)),
               const SizedBox(height: 30),
+              // Zeki Tilki
               CharacterCard(
                   name: "Zeki Tilki",
                   emoji: "🦊",
@@ -48,6 +50,7 @@ class CharacterSelectionScreen extends StatelessWidget {
                   onTap: () => _navigateToEmotion(context, "🦊", "Zeki Tilki",
                       "orman_bg.png", SoulMateColors.tilkiGlow)),
               const SizedBox(height: 30),
+              // Bilge Baykuş
               CharacterCard(
                   name: "Bilge Baykuş",
                   emoji: "🦉",
@@ -68,6 +71,7 @@ class CharacterSelectionScreen extends StatelessWidget {
     );
   }
 
+  // Burası kritik! Seçilen ismi bir sonraki ekrana taşıyoruz.
   void _navigateToEmotion(
       BuildContext context, String emoji, String name, String bg, Color color) {
     Navigator.push(
@@ -75,7 +79,7 @@ class CharacterSelectionScreen extends StatelessWidget {
       MaterialPageRoute(
         builder: (context) => EmotionSelectionScreen(
           emoji: emoji,
-          name: name,
+          name: name, // Bu isim backend'e gidecek!
           bgImage: bg,
           themeColor: color,
         ),
