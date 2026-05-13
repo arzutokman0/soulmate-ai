@@ -15,7 +15,7 @@ app.add_middleware(
 )
 
 # API Ayarları
-GENAI_API_KEY = "AIzaSyCF519Y8Y7uWwT58HT-GMj7bytbWkJUTZE"
+GENAI_API_KEY = ""
 genai.configure(api_key=GENAI_API_KEY)
 
 # OTOMATİK MODEL SEÇİCİ: Bilgisayarında hangi model varsa onu bulur

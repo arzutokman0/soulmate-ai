@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class StoryView extends StatefulWidget {
   final String emoji;
@@ -24,18 +25,21 @@ class _StoryViewState extends State<StoryView> {
   String _generatedStory = "";
   bool _isLoading = true;
 
+  // SESLENDİRME NESNELERİ
+  final FlutterTts flutterTts = FlutterTts();
+  bool isSpeaking = false;
+
   @override
   void initState() {
     super.initState();
-    _fetchStoryFromAI();
+    _fetchStoryFromAI(); // Sayfa açılınca masalı getir
   }
 
+  // BACKEND BAĞLANTISI
   Future<void> _fetchStoryFromAI() async {
     try {
-      // KRİTİK DEĞİŞİKLİK: Chrome (Web) üzerinden bağlandığın için 'localhost' kullanıyoruz
       final response = await http.post(
-        Uri.parse(
-            'http://localhost:8000/generate-story'), // Burayı güncelledik ✨
+        Uri.parse('http://localhost:8000/generate-story'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
           "character": widget.name,
@@ -49,18 +53,51 @@ class _StoryViewState extends State<StoryView> {
           _generatedStory = data['story'];
           _isLoading = false;
         });
-      } else {
-        setState(() {
-          _generatedStory =
-              "Hay aksi! Masal perileri yolda biraz gecikti. Lütfen tekrar dene.";
-          _isLoading = false;
-        });
       }
     } catch (e) {
       setState(() {
-        _generatedStory =
-            "Bağlantı kurulamadı. Sunucun (uvicorn) açık mı balım?";
+        _generatedStory = "Bağlantı hatası! Backend terminalin açık mı?";
         _isLoading = false;
+      });
+    }
+  }
+
+  // KİBAR VE TATLI SESLENDİRME FONKSİYONU ✨
+  Future<void> _speak(String text) async {
+    if (isSpeaking) {
+      await flutterTts.stop();
+      setState(() => isSpeaking = false);
+    } else {
+      // Dil ayarı
+      await flutterTts.setLanguage("tr-TR");
+
+      // KİBARLIK AYARLARI
+      // Pitch 1.1: Daha doğal ve kibar bir kadın sesi tonu sağlar
+      await flutterTts.setPitch(1.1);
+      // SpeechRate 0.45: Sakin, yormayan ve akıcı bir masal hızı
+      await flutterTts.setSpeechRate(0.45);
+      await flutterTts.setVolume(1.0);
+
+      // Tarayıcıdaki en iyi kadın sesini bulmaya çalışalım
+      try {
+        var voices = await flutterTts.getVoices;
+        for (var voice in voices) {
+          if (voice["name"].toString().toLowerCase().contains("female") ||
+              voice["name"].toString().toLowerCase().contains("emel")) {
+            await flutterTts
+                .setVoice({"name": voice["name"], "locale": "tr-TR"});
+            break;
+          }
+        }
+      } catch (e) {
+        print("Özel ses seçilemedi, varsayılan kibar tonda devam ediliyor.");
+      }
+
+      setState(() => isSpeaking = true);
+      await flutterTts.speak(text);
+
+      flutterTts.setCompletionHandler(() {
+        setState(() => isSpeaking = false);
       });
     }
   }
@@ -72,13 +109,17 @@ class _StoryViewState extends State<StoryView> {
       body: SafeArea(
         child: Column(
           children: [
+            // ÜST BAR
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
                   IconButton(
                     icon: const Icon(Icons.close, color: Colors.black54),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      flutterTts.stop();
+                      Navigator.pop(context);
+                    },
                   ),
                   const Spacer(),
                   Text("${widget.name} ile Masal Saati",
@@ -91,7 +132,9 @@ class _StoryViewState extends State<StoryView> {
                 ],
               ),
             ),
+
             const Spacer(),
+            // KARAKTER GÖRSELİ
             Hero(
               tag: 'character_bubble',
               child: Container(
@@ -112,11 +155,14 @@ class _StoryViewState extends State<StoryView> {
               ),
             ),
             const SizedBox(height: 20),
+
+            // MASAL METNİ KUTUSU
             Expanded(
               flex: 4,
               child: Container(
                 width: double.infinity,
-                margin: const EdgeInsets.all(20),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 padding: const EdgeInsets.all(25),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -128,8 +174,7 @@ class _StoryViewState extends State<StoryView> {
                 child: _isLoading
                     ? Center(
                         child:
-                            CircularProgressIndicator(color: widget.themeColor),
-                      )
+                            CircularProgressIndicator(color: widget.themeColor))
                     : SingleChildScrollView(
                         child: Column(
                           children: [
@@ -155,22 +200,26 @@ class _StoryViewState extends State<StoryView> {
                       ),
               ),
             ),
+
+            // OYNAT / DURDUR BUTONU
             Padding(
               padding: const EdgeInsets.only(bottom: 30),
               child: FloatingActionButton.large(
-                onPressed: _isLoading
-                    ? null
-                    : () {
-                        // TTS (Sesli Okuma) buraya gelecek
-                      },
+                onPressed: _isLoading ? null : () => _speak(_generatedStory),
                 backgroundColor: _isLoading ? Colors.grey : widget.themeColor,
-                child:
-                    const Icon(Icons.play_arrow, size: 50, color: Colors.white),
+                child: Icon(isSpeaking ? Icons.stop : Icons.play_arrow,
+                    size: 50, color: Colors.white),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
   }
 }
