@@ -1,11 +1,17 @@
-import google.generativeai as genai
-from fastapi import FastAPI
-from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
 import os
+import json
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from google import genai
+from google.genai import types
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
+# Chrome testlerinde tarayıcı engeline (CORS) takılmamak için gereken sihirli ayar
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -14,34 +20,49 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API Ayarları
-GENAI_API_KEY = ""
-genai.configure(api_key=GENAI_API_KEY)
-
-# OTOMATİK MODEL SEÇİCİ: Bilgisayarında hangi model varsa onu bulur
-try:
-    available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-    # Varsa 1.5-flash, yoksa pro, o da yoksa listedeki ilk modeli seçer
-    model_name = "models/gemini-1.5-flash" if "models/gemini-1.5-flash" in available_models else available_models[0]
-    model = genai.GenerativeModel(model_name)
-    print(f"--- AKTİF MODEL: {model_name} ---")
-except Exception as e:
-    print(f"Model listeleme hatası: {e}")
-    model = genai.GenerativeModel('gemini-pro') # En son çare
-
 class StoryRequest(BaseModel):
     character: str
     emotion: str
 
 @app.post("/generate-story")
 async def generate_story(request: StoryRequest):
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        print("HATA: .env dosyasında GEMINI_API_KEY bulunamadı!")
+        raise HTTPException(status_code=500, detail="API Key bulunamadı!")
+        
     try:
-        user_prompt = f"Karakter: {request.character}, Duygu: {request.emotion}. Bu bilgilerle kısa, pofuduk bir çocuk masalı yaz."
-        response = model.generate_content(user_prompt)
-        return {"story": response.text, "error": False}
+        # İzole sanal ortamda aslanlar gibi çalışan yeni nesil Google Client yapısı
+        client = genai.Client(api_key=api_key)
+        
+        prompt = f"""
+        Karakter: {request.character}
+        Duygu: {request.emotion}
+        
+        Lütfen yukarıdaki karakter ve duyguya uygun, çocuklar için pofuduk ve eğitici bir masal üret. 
+        Masal tam ortasında bir bilmeceyle durmalı. 
+        Yanıtı tam olarak şu JSON formatında ver (başka hiçbir metin veya markdown işareti ekleme):
+        {{
+          "storyPart1": "Masalın ilk yarısı...",
+          "riddleQuestion": "Tam burada sorulacak bilmece...",
+          "riddleOptions": ["Şık 1", "Şık 2", "Şık 3"],
+          "correctAnswer": "Doğru olan şık",
+          "storyPart2": "Bilmece çözüldükten sonraki mutlu son...",
+          "lessonLearned": "Bu masaldan çıkarılacak pofuduk ve eğitici ders (en fazla 20 kelime)",
+          "dailyMission": "Çocuğun gerçek hayatta yapacağı o duyguyla ilgili eğlenceli görev (Örn: Bugün birine teşekkür et!)"
+        }}
+        """
+        
+        # Google'ın en güncel ve kararlı modeli olan gemini-2.5-flash ve JSON çıktısı güvencesi
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json"
+            )
+        )
+        
+        return json.loads(response.text)
     except Exception as e:
-        return {"story": f"Hata oluştu: {str(e)}", "error": True}
-
-@app.get("/")
-async def root():
-    return {"status": "running"}
+        print(f"YAPAY ZEKA VEYA PARSE HATASI: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

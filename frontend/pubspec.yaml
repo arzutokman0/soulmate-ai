@@ -1,27 +1,32 @@
-name: soulmate_frontend
-description: "A specialized child development assistant for ages 0-7."
+name: frontend
+description: "A new Flutter project."
+publish_to: 'none'
+
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ^3.11.5
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_tts: ^4.2.5
-  http: ^1.1.0
+  cupertino_icons: ^1.0.8
+  http: ^1.6.0
+  google_fonts: ^8.1.0
+  google_generative_ai: ^0.4.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
-
-  # Resimlerimizi buraya ekliyoruz. 
-  # Dosya isimlerinin assets klasöründekilerle birebir aynı olması çok önemli!
   assets:
-    - assets/orman_bg.png
-    - assets/okyanus_bg.png
-    - assets/gece_bg.png
+    - assets/fox.png
+    - assets/narwhal.png
+    - assets/bear.png
+    - assets/happy.png  
+    - assets/sad.png
+    - assets/curious.png
